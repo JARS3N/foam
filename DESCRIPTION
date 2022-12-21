@@ -1,0 +1,13 @@
+Package: foam
+Type: Package
+Title: foam
+Version: 0.1.0
+Author: JARS3N
+Maintainer: The package maintainer <JARS3N@GMAIL.COM>
+Description: Working with Wave Data & Meta Data, no rates are available in the current files types.
+License: NONE
+Imports:
+      XML,
+      dplyr
+Encoding: UTF-8
+LazyData: true
