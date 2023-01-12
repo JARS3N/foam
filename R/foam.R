@@ -13,6 +13,7 @@ foam <- R6::R6Class(
     temp_tolerance = NULL,
     atmospheric_pressure = NULL,
     tick_table = NULL,
+    groups = NULL,
     O2_coefs = NULL,
     pH_coefs = NULL,
     calibration = NULL,
@@ -48,6 +49,7 @@ foam <- R6::R6Class(
             XML::xmlValue
           )
         )
+      self$groups <- foam::get_groups(self$xml)
       self$template <- foam::get_template(self$xml)
       self$tick_table <- foam::get_tick_table(self$xml)
       self$O2_coefs <- foam::get_O2_coefs(self$xml)
