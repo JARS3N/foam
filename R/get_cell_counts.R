@@ -5,7 +5,7 @@ get_cell_counts <- function(doc) {
   num_vals <- as.numeric(gsub("<double>|</double>", "", vals))
   n <- length(num_vals) / 2 
   data.frame(
-    Well = plates::plate(n)$Wells,
+    Well = plates::num_to_well(1:n,n),
     Norm_count = num_vals[1:n],
     Raw_count = num_vals[(n + 1):(n * 2)]
   )
