@@ -62,7 +62,7 @@ foam <- R6::R6Class(
       self$commands <-foam::get_commands(self$xml)
       self$extra_parameters <- foam::get_extra_pars(self$xml)
       self$type <- foam::get_type(self$xml,self$Inst,self$file,self$calibration)
-      self$summary <- if(grepl("wet( |)qc|gain|ksv|pka",self$assay){
+      self$summary <- if(grepl("wet( |)qc|gain|ksv|pka",self$assay)){
         foam::analysis(self)
         }
     }
