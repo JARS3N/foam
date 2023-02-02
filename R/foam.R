@@ -25,7 +25,7 @@ foam <- R6::R6Class(
     extra_parameters = NULL,
 
     initialize = function(x) {
-      library(dlyr)
+      library(dplyr)
       library(XML)
       self$xml <- foam::xml(x)
       self$file <-
