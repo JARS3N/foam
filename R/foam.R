@@ -33,7 +33,6 @@ foam <- R6::R6Class(
        self$software <- foam::get_software(self$xml)
        self$Inst <- xpathSApply(self$xml, "//InstrumentSerialNumber", xmlValue)
        self$lot <- foam::get_lot(self$xml,self$file)
-       self$type <- foam::get_type(self$xml,self$Inst,self$file)
        self$sn <- xpathSApply(self$xml, "//Cartridge//Serial", xmlValue)
        self$plate <- foam::get_plate(self$xml)
        self$temp_tolerance <- xpathSApply(self$xml,"//EnvironmentDataModifiers/TemperatureTolerance/text()",xmlValue)
@@ -62,6 +61,7 @@ foam <- R6::R6Class(
       self$assay <- foam::determine_assay(self$template, self$file, F, NULL)
       self$commands <-foam::get_commands(self$xml)
       self$extra_parameters <- foam::get_extra_pars(self$xml)
+      self$type <- foam::get_type(self$xml,self$Inst,self$file,self$calibration)
     }
   )
 )
