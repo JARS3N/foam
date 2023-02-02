@@ -1,11 +1,7 @@
 get_lot <- function(doc,file) {
-  out <- xpathSApply(doc, "//Cartridge//Lot", xmlValue)
-  if (out != "") {
-    return(out)
-  } else{
-    substr(regmatches(
-      file,
-      gregexpr("[C|W|T|Q|B][0-9|E][0-9]{4}", file)
-    )[[1]], 1, 1)
-  }
+  expected <- unlist(xpathSApply(doc, "//Cartridge//Lot", xmlValue))
+  from_file <- unlist(foam::lot_from_string(file))
+  if (! is.null(expected)){return(expected)}
+  if (! identical(from_file,character(0))){return(from_file)}
+  "UNKNWN" #otherwise known
 }
