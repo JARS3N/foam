@@ -31,11 +31,11 @@ foam <- R6::R6Class(
       self$file <-
         basename(xpathSApply(self$xml, "//FileName", xmlValue))
        self$software <- foam::get_software(self$xml)
-       self$lot <- foam::get_lot(self$xml,self$file)
+       self$Inst <- xpathSApply(self$xml, "//InstrumentSerialNumber", xmlValue)
+       self$lot <- foam::get_lot(self$xml,self$Inst,self$file)
        self$type <- foam::get_type(self$xml,self$file)
        self$sn <- xpathSApply(self$xml, "//Cartridge//Serial", xmlValue)
        self$plate <- foam::get_plate(self$xml)
-       self$Inst <- xpathSApply(self$xml, "//InstrumentSerialNumber", xmlValue)
        self$temp_tolerance <- xpathSApply(self$xml,"//EnvironmentDataModifiers/TemperatureTolerance/text()",xmlValue)
        self$calibration_temp <- as.numeric(xpathSApply(
         self$xml,
