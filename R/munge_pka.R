@@ -14,30 +14,25 @@ munge_pka <- function(lvls, type) {
     merge(pH_df) %>%
     group_by(Well, Measure, pH) %>%
     filter(Tick >= (max(Tick) - 2)) %>%
-    summarise(counts = mean(pH_CorrectedEmission)) %>% 
+    summarise(counts = mean(pH_CorrectedEmission)) %>%
     ungroup()
   
-    
-    if (max(LVL$Measure == 2) & type != "W") {
-      LVL %>%
-               left_join(., tibble(
-                 Measure = c(1, 2),
-                 dye = c("CL", "PR")
-               )) %>% select(-Measure)
-    } else if (type == "W" & max(LVL$Measure) == 1) {
-    
-        mutate(
-          LVL,
-          W = plates::num_to_well(Well, 96),
-          Col = plates::cols(W),
-          test = factor(Col > 6, levels = c(F, T)),
-          dye = c("CL", "PR")[test]
-        ) %>%
-        select(-W, -Col, -Measure,-test)
-    } else{
-      mutate(LVL, dye = "CL") %>%
-        select(-Measure)
-    }
+  if (max(LVL$Measure == 2) & type != "W") {
+    LVL %>%
+      left_join(., tibble(Measure = c(1, 2),
+                          dye = c("CL", "PR"))) %>% select(-Measure)
+  } else if (type == "W" & max(LVL$Measure) == 1) {
+    mutate(
+      LVL,
+      W = plates::num_to_well(Well, 96),
+      Col = plates::cols(W),
+      test = factor(Col > 6, levels = c(F, T)),
+      dye = c("CL", "PR")[test]
+    ) %>%
+      select(-W,-Col,-Measure, -test)
+  } else{
+    mutate(LVL, dye = "CL") %>%
+      select(-Measure)
+  }
   
-}
 }
