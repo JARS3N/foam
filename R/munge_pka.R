@@ -20,11 +20,11 @@ munge_pka <- function(lvls, type) {
     ungroup()
   MM <- max(LVL$Measure)
   is96 <- type %in% c("W","X")
-  if (MM==2 & !is96) {
+  if (MM == 2 & !is96) {
     LVL %>%
       left_join(., tibble(Measure = c(1, 2),
                           dye = c("CL", "PR"))) %>% select(-Measure)
-  } else if (is96 & MM = 1) {
+  } else if (is96 & MM == 1) {
     mutate(
       LVL,
       W = plates::num_to_well(Well, 96),
