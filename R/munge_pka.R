@@ -4,7 +4,10 @@ munge_pka <- function(lvls, type) {
     "C" = 1,
     "Q" = 3,
     "B" = 3,
-    "W" = 12
+    "W" = 12,
+    "X" = 12,
+    "Y" = 3,
+    "Z" = 1
   )[type])
   pH_df <- tibble(pH = unlist(lapply(pH, rep, times = reps)),
                   Well = seq_along(pH))
@@ -15,12 +18,13 @@ munge_pka <- function(lvls, type) {
     filter(Tick >= (max(Tick) - 2)) %>%
     summarise(counts = mean(pH_CorrectedEmission)) %>%
     ungroup()
-  
-  if (max(LVL$Measure == 2) & type != "W") {
+  MM <- max(LVL$Measure)
+  is96 <- type %in% c("W","X")
+  if (MM==2 & !is96) {
     LVL %>%
       left_join(., tibble(Measure = c(1, 2),
                           dye = c("CL", "PR"))) %>% select(-Measure)
-  } else if (type == "W" & max(LVL$Measure) == 1) {
+  } else if (is96 & MM = 1) {
     mutate(
       LVL,
       W = plates::num_to_well(Well, 96),
