@@ -2,7 +2,6 @@ munge_pka <- function(lvls, type) {
   pH <- c(3.8, 5, 5.8, 6.6, 7.0, 7.4, 8.15, 9.2)
   reps <- unname(c(
     "C" = 1,
-    "T" = 3,
     "Q" = 3,
     "B" = 3,
     "W" = 12
