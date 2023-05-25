@@ -22,6 +22,7 @@ foam <- R6::R6Class(
     assay = NULL,
     commands = NULL,
     summary = NULL,
+    barcodes = NULL,
     extra_parameters = NULL,
 
     initialize = function(x) {
@@ -49,6 +50,7 @@ foam <- R6::R6Class(
             XML::xmlValue
           )
         )
+      self$barcodes <-foam::barcodes(self$xml) 
       self$groups <- foam::get_groups(self$xml)
       self$template <- foam::get_template(self$xml)
       self$tick_table <- foam::get_tick_table(self$xml)
