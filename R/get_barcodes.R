@@ -1,9 +1,9 @@
-barcodes<-function(doc){
-require(dplyr)
-  nms<-c("Plate","Cartridge")
-  xpathApply(doc,
-              paste0("//",nms,"/Barcode") ,
-              xmlValue) %>% 
-    setNames(.,nms) %>% 
-    as.data.frame()
+barcodes <- function(doc) {
+  require(XML)
+  nms <- c("Plate", "Cartridge")
+  xpath <- setNames(paste0("//", nms , "/Barcode"), nms)
+  data.frame(lapply(xpath,
+                    xpathSApply,
+                    doc = xml,
+                    fun = xmlValue))
 }
