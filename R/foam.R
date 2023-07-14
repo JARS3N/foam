@@ -30,6 +30,7 @@ foam <- R6::R6Class(
       library(dplyr)
       library(XML)
       self$xml <- foam::xml(x)
+      self$last_run <- foam::get_dt(self$xml)
       self$file <-
         basename(xpathSApply(self$xml, "//FileName", xmlValue))
        self$software <- foam::get_software(self$xml)
@@ -64,7 +65,6 @@ foam <- R6::R6Class(
       self$assay <- foam::determine_assay(self$template, self$file, F, NULL)
       self$commands <-foam::get_commands(self$xml)
       self$extra_parameters <- foam::get_extra_pars(self$xml)
-      self$last_run <- foam::get_dt(self$xml)
       self$type <- foam::get_type(self$xml,self$Inst,self$file,self$calibration)
       self$summary <- if(grepl("wet( |)qc|gain|ksv|pka",self$assay)){
         foam::analysis(self)
