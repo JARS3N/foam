@@ -24,22 +24,22 @@ foam <- R6::R6Class(
     summary = NULL,
     barcodes = NULL,
     extra_parameters = NULL,
-    last_run = NULL
-
+    last_run = NULL,
+    
     initialize = function(x) {
       library(dplyr)
       library(XML)
       self$xml <- foam::xml(x)
-      #self$last_run <- foam::get_dt(self$xml)
+      self$last_run <- foam::get_dt(self$xml)
       self$file <-
         basename(xpathSApply(self$xml, "//FileName", xmlValue))
-       self$software <- foam::get_software(self$xml)
-       self$Inst <- xpathSApply(self$xml, "//InstrumentSerialNumber", xmlValue)
-       self$lot <- foam::get_lot(self$xml,self$file)
-       self$sn <- xpathSApply(self$xml, "//Cartridge//Serial", xmlValue)
-       self$plate <- foam::get_plate(self$xml)
-       self$temp_tolerance <- xpathSApply(self$xml,"//EnvironmentDataModifiers/TemperatureTolerance/text()",xmlValue)
-       self$calibration_temp <- as.numeric(xpathSApply(
+      self$software <- foam::get_software(self$xml)
+      self$Inst <- xpathSApply(self$xml, "//InstrumentSerialNumber", xmlValue)
+      self$lot <- foam::get_lot(self$xml,self$file)
+      self$sn <- xpathSApply(self$xml, "//Cartridge//Serial", xmlValue)
+      self$plate <- foam::get_plate(self$xml)
+      self$temp_tolerance <- xpathSApply(self$xml,"//EnvironmentDataModifiers/TemperatureTolerance/text()",xmlValue)
+      self$calibration_temp <- as.numeric(xpathSApply(
         self$xml,
         "//AssayDataSet//CalibrationStartTemperature",
         xmlValue
@@ -68,7 +68,7 @@ foam <- R6::R6Class(
       self$type <- foam::get_type(self$xml,self$Inst,self$file,self$calibration)
       self$summary <- if(grepl("wet( |)qc|gain|ksv|pka",self$assay)){
         foam::analysis(self)
-        }
+      }
     }
   )
 )
