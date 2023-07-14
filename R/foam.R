@@ -24,13 +24,13 @@ foam <- R6::R6Class(
     summary = NULL,
     barcodes = NULL,
     extra_parameters = NULL,
-    last_run = NULL,
+    last_run = NULL
 
     initialize = function(x) {
       library(dplyr)
       library(XML)
       self$xml <- foam::xml(x)
-      self$last_run <- foam::get_dt(self$xml)
+      #self$last_run <- foam::get_dt(self$xml)
       self$file <-
         basename(xpathSApply(self$xml, "//FileName", xmlValue))
        self$software <- foam::get_software(self$xml)
