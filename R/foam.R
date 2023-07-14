@@ -24,7 +24,7 @@ foam <- R6::R6Class(
     summary = NULL,
     barcodes = NULL,
     extra_parameters = NULL,
-    last_run = NULL
+    last_run = NULL,
 
     initialize = function(x) {
       library(dplyr)
