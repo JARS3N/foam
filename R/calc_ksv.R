@@ -6,7 +6,8 @@ calc_ksv<-function(lvls,ppo2,cal){
     mutate(Measure = c("Ambient","F0")[Measure]) %>%
     tidyr::spread(.,Measure,ox) %>%
     mutate(KSV = ((F0/Ambient)-1)/ppo2) %>%
-    left_join(.,cal)
+    left_join(.,cal) %>%
+    mutate(Gain=NA,sorpH=NA)
 }
 
 
