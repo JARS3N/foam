@@ -3,5 +3,6 @@ calc_gain<- function(lvls, pH_target, cal) {
     group_by(Well) %>%
     summarize(sorpH = mean(pH_CorrectedEmission)) %>%
     left_join(., cal) %>%
-    mutate(pH_target = pH_target,Gain = (pH_target / pH.CalEmission) * (1 / 800) * (pH.CalEmission - sorpH))
+    mutate(pH_target = pH_target,Gain = (pH_target / pH.CalEmission) * (1 / 800) * (pH.CalEmission - sorpH)) %>%
+    mutate(KSV = NA,Ambient = NA,F0=NA)
 }
