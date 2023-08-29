@@ -5,7 +5,8 @@ calc_ksv<-function(lvls,ppo2,cal){
     summarise(ox =mean(O2_CorrectedEmission)) %>%
     mutate(Measure = c("Ambient","F0")[Measure]) %>%
     tidyr::spread(.,Measure,ox) %>%
-    mutate(KSV = ((F0/Ambient)-1)/ppo2)
+    mutate(KSV = ((F0/Ambient)-1)/ppo2) %>%
+    left_join(.,cal)
 }
 
 
