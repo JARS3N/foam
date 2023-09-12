@@ -1,6 +1,6 @@
 analysis<-function(X){
   assay<-tolower(X$assay)
-  if(X$type=="C" & grepl("wet[ |]qc",assay)==T){
+  if(X$type=="C" & grepl("wet( |)qc",assay)==T){
     return(X$summary <-foam::combo_assay(X))
   }else{
     if(assay=="ksv"){
