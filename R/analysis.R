@@ -1,5 +1,9 @@
 analysis<-function(X){
   assay<-tolower(X$assay)
+  if(length(X$assay)>1){
+    message("confused,assay length >1")
+    return(NULL)
+  }
   if(X$type=="C" & grepl("wet( |)qc",assay)==T){
     return(X$summary <-foam::combo_assay(X))
   }else{
