@@ -1,4 +1,5 @@
 calc_ksv<-function(lvls,ppo2,cal){
+  options(dplyr.summarise.inform = FALSE)
 select(lvls,Tick,Well,Measure,O2_CorrectedEmission) %>%
   group_by(Well,Measure) %>%
   filter(Tick>(max(Tick)-3)) %>%
