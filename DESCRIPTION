@@ -1,7 +1,7 @@
 Package: foam
 Type: Package
 Title: foam
-Version: 0.1.2
+Version: 0.1.3
 Author: JARS3N
 Maintainer: The package maintainer <JARS3N@GMAIL.COM>
 Description: Working with Wave Data & Meta Data, no rates are available in the current files types.
