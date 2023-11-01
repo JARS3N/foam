@@ -23,5 +23,5 @@ paths<-list()
     z = TICKS$Tick
   ) %>%
     dplyr::bind_rows() %>%
-    dplyr::left_join(., TICKS)
+    dplyr::left_join(., TICKS, by = 'Tick')
 }
