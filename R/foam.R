@@ -62,19 +62,13 @@ foam <- R6::R6Class(
       self$levels <- foam::get_lvls(self$xml,self$tick_table)
       self$levels$pH <- foam::calc_pH_levels(self$calibration,self$levels,self$pH_coefs$gain)$pH
       self$levels$O2 <- foam::calc_O2_levels(self$calibration,self$levels,self$O2_coefs)$O2
-      message("assay")
       self$assay <- foam::determine_assay(self$template, self$file, F, NULL)
-      message("commands")
       self$commands <-foam::get_commands(self$xml)
-      message("params")
       self$extra_parameters <- foam::get_extra_pars(self$xml)
-      message("type")
       self$type <- foam::get_type(self$xml,self$Inst,self$file,self$calibration)
-      message("summary")
       self$summary <- if(grepl("wet( |)qc|gain|ksv|pka",self$assay)){
         foam::analysis(self)
       }
-      message('end.')
     }
   )
 )
