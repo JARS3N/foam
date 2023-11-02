@@ -1,6 +1,6 @@
 calc_O2_levels <- function(cal, lvls, coefs) {
   require(dplyr)
-  ppO2 <- foam::partial_pressure_ox(37)
+  ppO2 <- pp::O2(37)
   lvls <- select(lvls, Tick, Measure, Well, O2_CorrectedEmission)
   cal <- select(cal, Well, O2.CalEmission) %>%
     mutate(F0 = O2.CalEmission * (ppO2 * coefs$Ksv + 1))
