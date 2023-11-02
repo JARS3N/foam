@@ -7,8 +7,7 @@ select(lvls,Tick,Well,Measure,O2_CorrectedEmission) %>%
   mutate(Measure = c("Ambient","F0")[Measure]) %>%
   tidyr::spread(.,Measure,ox) %>%
   mutate(KSV = ((F0/Ambient)-1)/ppo2) %>%
- # left_join(.,cal,by = c("Well", "F0"))%>%
-  left_join(.,cal)%>%
+  left_join(.,cal,by="Well") %>%
   mutate(Gain=NA,sorpH=NA)
 }
 
