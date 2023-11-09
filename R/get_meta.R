@@ -5,5 +5,5 @@ meta<-function(u){
                            Lot = paste0(u$type,u$lot),
                            sn = u$sn,
                            file = u$file
-  ) ,software,x$last_run,x$barcodes)
+  ) ,software,u$last_run,u$barcodes)
 }
