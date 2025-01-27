@@ -1,10 +1,20 @@
 combo_assay<-function(X){
-  foam::calc_gain(filter(X$levels,Measure==1),X$pH_coefs$target,X$calibration) %>%
-  dplyr::left_join(
-   foam::calc_ksv(X$levels,X$O2_coefs$co,X$calibration)
-  ) %>%
-  dplyr::left_join(.,X$calibration)
+A <- foam::calc_gain(filter(X$levels,Measure==1),X$pH_coefs$target,X$calibration) %>%
+    select(.,Well,Gain,sorpH)
+B <- foam::calc_ksv(X$levels,X$O2_coefs$co,X$calibration) %>% 
+  select(.,Well,KSV,F0,Ambient)
+C <- X$calibration
+left_join(A,B) %>% left_join(C)   
 }
+
+
+#combo_assay<-function(X){
+#  foam::calc_gain(filter(X$levels,Measure==1),X$pH_coefs$target,X$calibration) %>%#
+#  dplyr::left_join(
+#   foam::calc_ksv(X$levels,X$O2_coefs$co,X$calibration)
+#  ) %>%
+#  dplyr::left_join(.,X$calibration)
+#}
 #combo_assay <- function(X) {
 #  A <- foam::calc_gain(filter(X$levels, Measure == 1),
 #                       X$pH_coefs$target,
