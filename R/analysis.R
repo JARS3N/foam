@@ -4,7 +4,7 @@ analysis<-function(X){
     message("confused,assay length >1")
     return(NULL)
   }
-  if(X$type=="C" & grepl("wet( |)qc",assay)==T){
+  if(X$type=="C" & grepl("wet( |)qc",X$assay)==T){
     return(X$summary <-foam::combo_assay(X))
   }else{
     if(assay=="ksv"){
